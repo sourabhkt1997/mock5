@@ -32,7 +32,7 @@ doctorrouter.get("/",async(req,res)=>{
 doctorrouter.get("/finddoctor",async(req,res)=>{
     try {
         let {doctor}=req.query
-        let data=await doctorModel.find({name:req.query})
+        let data=await doctorModel.find({name:{$regex:doctor,$options:"i"}})
          res.status(200).send(data)
     } catch (error) {
         res.status(400).send(error.message)
